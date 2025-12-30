@@ -2,25 +2,31 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>老年痴呆症（阿尔茨海默病）科普</title>
 <style>
 body{margin:0;font-family:"Microsoft YaHei",Arial,sans-serif;background:#f5f7fa;color:#222;line-height:1.8;font-size:18px}
-header{background:#1f4fd8;color:#fff;padding:30px 15px;text-align:center}
-header h1{margin:0;font-size:2.2em}
-header p{margin:8px 0 0}
-.toolbar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding:12px;background:#fff;border-bottom:1px solid #ddd}
-button{font-size:16px;padding:8px 14px;border:1px solid #ccc;border-radius:6px;background:#fff;cursor:pointer}
-main{max-width:960px;margin:20px auto;padding:0 15px}
-section{background:#fff;border-radius:10px;padding:24px;margin-bottom:22px;border:1px solid #e5e5e5}
-h2{color:#1f4fd8;margin-top:0;cursor:pointer;user-select:none;display:flex;align-items:center}
-h2::before{content:"▶";display:inline-block;margin-right:10px;transition:transform 0.3s ease}
+header{background:#1f4fd8;color:#fff;padding:25px 15px;text-align:center}
+header h1{margin:0;font-size:2em}
+header p{margin:6px 0 0;font-size:1em}
+.toolbar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding:10px;background:#fff;border-bottom:1px solid #ddd}
+button{font-size:16px;padding:8px 12px;border:1px solid #ccc;border-radius:6px;background:#fff;cursor:pointer}
+main{max-width:960px;margin:15px auto;padding:0 10px}
+section{background:#fff;border-radius:10px;padding:20px;margin-bottom:18px;border:1px solid #e5e5e5}
+h2{color:#1f4fd8;margin-top:0;cursor:pointer;user-select:none;display:flex;align-items:center;font-size:1.2em}
+h2::before{content:"▶";display:inline-block;margin-right:10px;transition:transform 0.3s ease;font-size:1em}
 h2.expanded::before{transform:rotate(90deg)}
-ul{padding-left:22px}
-p.detail{margin-top:12px;color:#333}
-body.big-font{font-size:22px}
+ul{padding-left:20px}
+p.detail{margin-top:10px;color:#333;font-size:0.95em}
+body.big-font{font-size:20px}
 .content-collapsible{display:none;overflow:hidden;transition:max-height 0.5s ease,padding 0.3s ease}
-footer{text-align:center;font-size:14px;color:#666;padding:20px}
+footer{text-align:center;font-size:14px;color:#666;padding:15px}
+@media(max-width:600px){
+  header h1{font-size:1.5em}
+  header p{font-size:0.9em}
+  button{font-size:14px;padding:6px 10px}
+  body.big-font{font-size:18px}
+}
 @media print{.toolbar{display:none}body{background:#fff;color:#000;font-size:14px}}
 </style>
 </head>
@@ -37,7 +43,6 @@ footer{text-align:center;font-size:14px;color:#666;padding:20px}
 </div>
 
 <main>
-<!-- 章节模板 -->
 <section>
 <h2 onclick="toggleSection(this)">什么是老年痴呆症？</h2>
 <div class="content-collapsible">
@@ -133,11 +138,11 @@ footer{text-align:center;font-size:14px;color:#666;padding:20px}
 </main>
 
 <footer>
-<p>科普网页 - 离线可用 | 平平无奇整理</p>
+<p>科普网页 - 离线可用 | 吴小凡整理</p>
 </footer>
 
 <script>
-// 折叠/展开功能 + 动画 + 箭头
+// 折叠/展开功能 + 箭头动画
 function toggleSection(header){
   const content = header.nextElementSibling;
   if(content.style.display === 'block'){
@@ -149,13 +154,11 @@ function toggleSection(header){
   }
 }
 
-// 初始化折叠状态
+// 初始化折叠状态（全部折叠）
 document.querySelectorAll('.content-collapsible').forEach(c=>c.style.display='none');
 
 // 字体切换
-function toggleFont(){
-  document.body.classList.toggle('big-font');
-}
+function toggleFont(){ document.body.classList.toggle('big-font'); }
 
 // 中英文切换
 const contentLang = {
