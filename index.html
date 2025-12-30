@@ -1,176 +1,129 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>老年痴呆症（阿尔茨海默病）科普</title>
-<style>
-body{margin:0;font-family:"Microsoft YaHei",Arial,sans-serif;background:#f5f7fa;color:#222;line-height:1.8;font-size:18px}
-header{background:#1f4fd8;color:#fff;padding:25px 15px;text-align:center}
-header h1{margin:0;font-size:2em}
-header p{margin:6px 0 0;font-size:1em}
-.toolbar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding:10px;background:#fff;border-bottom:1px solid #ddd}
-button{font-size:16px;padding:8px 12px;border:1px solid #ccc;border-radius:6px;background:#fff;cursor:pointer}
-main{max-width:960px;margin:15px auto;padding:0 10px}
-section{background:#fff;border-radius:10px;padding:20px;margin-bottom:18px;border:1px solid #e5e5e5}
-h2{color:#1f4fd8;margin-top:0;cursor:pointer;user-select:none;display:flex;align-items:center;font-size:1.2em}
-h2::before{content:"▶";display:inline-block;margin-right:10px;transition:transform 0.3s ease;font-size:1em}
-h2.expanded::before{transform:rotate(90deg)}
-ul{padding-left:20px}
-p.detail{margin-top:10px;color:#333;font-size:0.95em}
-body.big-font{font-size:20px}
-.content-collapsible{display:none;overflow:hidden;transition:max-height 0.5s ease,padding 0.3s ease}
-footer{text-align:center;font-size:14px;color:#666;padding:15px}
-@media(max-width:600px){
-  header h1{font-size:1.5em}
-  header p{font-size:0.9em}
-  button{font-size:14px;padding:6px 10px}
-  body.big-font{font-size:18px}
-}
-@media print{.toolbar{display:none}body{background:#fff;color:#000;font-size:14px}}
-</style>
-</head>
-<body>
-<header>
-<h1 id="title">老年痴呆症（阿尔茨海默病）</h1>
-<p id="subtitle">认识疾病 · 早期发现 · 科学照护</p>
-</header>
-
-<div class="toolbar">
-<button onclick="switchLang()">🌍 中文 / English</button>
-<button onclick="toggleFont()">👓 老年友好大字</button>
-<button onclick="window.print()">🖨 打印 / PDF</button>
-</div>
-
-<main>
 <section>
-<h2 onclick="toggleSection(this)">什么是老年痴呆症？</h2>
+<h2 onclick="toggleSection(this)">互动小工具</h2>
 <div class="content-collapsible">
-<p>老年痴呆症通常指阿尔茨海默病，是一种慢性、进行性的神经退行性疾病，并非正常衰老。</p>
-<p>病理机制包括β-淀粉样蛋白沉积、tau蛋白缠结，导致神经元逐渐死亡和大脑萎缩。</p>
-<p class="detail">阿尔茨海默病通常影响老年人，但也可能在中年发病。早期症状包括轻度记忆下降和轻微认知障碍，如果得到早期诊断，可以通过生活方式调整、认知训练和药物治疗延缓病程发展。</p>
+<p class="detail">离线可用互动工具，帮助患者进行认知训练和健康记录：</p>
+
+<h3>1. 随机记忆题</h3>
+<p>系统随机显示 3 个词汇，记住后输入正确顺序：</p>
+<button onclick="startMemoryTest()">生成词汇</button>
+<p id="memoryWords" style="font-weight:bold;margin:5px 0;"></p>
+<input type="text" id="memoryInput" placeholder="按顺序输入词汇，用空格分隔"/>
+<button onclick="checkMemory()">提交</button>
+<p id="memoryResult"></p>
+
+<h3>2. 简单选择题</h3>
+<p>请选择正确答案：</p>
+<div id="quizArea"></div>
+<button onclick="checkQuiz()">提交答案</button>
+<p id="quizResult"></p>
+
+<h3>3. 简单逻辑训练</h3>
+<p>判断以下说法是否正确：</p>
+<div id="logicArea"></div>
+<button onclick="checkLogic()">提交答案</button>
+<p id="logicResult"></p>
+
+<h3>4. 日常健康记录</h3>
+<textarea id="healthLog" rows="4" placeholder="记录今日活动、饮食、情绪等..."></textarea>
+<button onclick="saveLog()">保存记录</button>
+<p id="logResult"></p>
 </div>
 </section>
-
-<section>
-<h2 onclick="toggleSection(this)">疾病进程分期</h2>
-<div class="content-collapsible">
-<ul>
-<li>早期：轻度记忆力下降、偶尔迷路、日常生活自理能力基本正常</li>
-<li>中期：认知功能明显下降、语言表达困难、日常生活需帮助</li>
-<li>晚期：完全依赖照护、行动能力受限、可能出现失禁</li>
-</ul>
-<p class="detail">疾病分期帮助家属和医护人员评估患者的照护需求。早期以轻度认知障碍为主，中期开始影响日常生活，晚期患者需全面照护。合理的照护计划可提高生活质量。</p>
-</div>
-</section>
-
-<section>
-<h2 onclick="toggleSection(this)">家庭照护指南</h2>
-<div class="content-collapsible">
-<ul>
-<li>饮食安排：低盐低脂、高蛋白、补充DHA</li>
-<li>日常活动：散步、园艺、轻运动</li>
-<li>安全防护：防跌倒、防走失、防误食药物</li>
-<li>沟通技巧：用简单句子、耐心倾听、正面鼓励</li>
-<li>心理支持：陪伴与互动，避免孤独和抑郁</li>
-<li>日常认知训练：记忆游戏、简单手工、阅读活动</li>
-</ul>
-<p class="detail">家庭照护需要耐心和科学方法。通过合理饮食、规律作息和轻度运动，患者能保持身体健康。沟通技巧和认知训练有助于减缓记忆衰退，同时增强情绪稳定性。</p>
-</div>
-</section>
-
-<section>
-<h2 onclick="toggleSection(this)">预防措施</h2>
-<div class="content-collapsible">
-<ul>
-<li>健康饮食：多蔬菜水果、坚果、全谷类和深海鱼</li>
-<li>适量运动：每天30分钟有氧运动，如快走、游泳、骑车</li>
-<li>脑力锻炼：阅读、写作、下棋、学习新技能</li>
-<li>规律作息：保证充足睡眠，避免熬夜</li>
-<li>心理健康：保持社交活动，参加兴趣小组</li>
-<li>控制心脑血管风险：管理高血压、高血脂、糖尿病</li>
-</ul>
-<p class="detail">科学研究表明，健康生活方式可以降低阿尔茨海默病风险。饮食、运动和脑力活动结合，有助于保持认知功能。良好的心理健康和规律作息也是关键因素。</p>
-</div>
-</section>
-
-<section>
-<h2 onclick="toggleSection(this)">心理与社会支持</h2>
-<div class="content-collapsible">
-<ul>
-<li>家属压力缓解：加入互助群、心理咨询</li>
-<li>志愿者及社区资源：养老院、日间照护中心、支持群体</li>
-<li>法律与财务规划：提前安排监护、资产管理</li>
-<li>保持社交活动：参与兴趣班、社区活动，减少孤独感</li>
-</ul>
-<p class="detail">患者及家属的心理支持非常重要。通过社区资源、志愿服务和兴趣活动，既能缓解孤独，也能提升生活质量。法律与财务规划有助于减少未来照护压力。</p>
-</div>
-</section>
-
-<section>
-<h2 onclick="toggleSection(this)">常见误区</h2>
-<div class="content-collapsible">
-<ul>
-<li>老年痴呆就是正常衰老 —— 实际是疾病，可早期干预</li>
-<li>药物能治愈 —— 药物只能延缓症状发展</li>
-<li>运动无关 —— 适量运动对脑健康非常重要</li>
-<li>家族无病例就不必担心 —— 多种因素可影响风险</li>
-</ul>
-<p class="detail">认识误区可以帮助家属科学应对疾病，避免焦虑和不当照护。早期干预、适度运动和生活方式调整均有效改善预后。</p>
-</div>
-</section>
-
-<section>
-<h2 onclick="toggleSection(this)">实用资源与参考资料</h2>
-<div class="content-collapsible">
-<ul>
-<li>书籍推荐：《阿尔茨海默病自助手册》《科学照护老年痴呆症》《脑健康与认知训练》</li>
-<li>官方指南：世界卫生组织（WHO）老年痴呆症指南、中国老年学和老年医学学会指南</li>
-<li>离线科普网站资料：PDF、HTML手册</li>
-<li>视频教程：认知训练视频、护理技巧教学</li>
-<li>社区与互助：本地养老机构、日间照护中心、志愿者支持群</li>
-<li>医学期刊：可下载离线阅读的阿尔茨海默病研究论文PDF</li>
-</ul>
-<p class="detail">结合书籍、官方指南和社区资源，家属和护理人员可系统学习照护知识。离线资料和视频教程方便随时查阅，提高日常照护能力。</p>
-</div>
-</section>
-
-</main>
-
-<footer>
-<p>科普网页 - 离线可用 | 平平无奇整理</p>
-</footer>
 
 <script>
-// 折叠/展开功能 + 箭头动画
-function toggleSection(header){
-  const content = header.nextElementSibling;
-  if(content.style.display === 'block'){
-    content.style.display='none';
-    header.classList.remove('expanded');
-  }else{
-    content.style.display='block';
-    header.classList.add('expanded');
+// 互动小游戏逻辑
+// ---------- 随机记忆 ----------
+const memoryWordsList = ["苹果","书本","椅子","花朵","太阳","雨伞","猫","狗","手表"];
+let currentMemory = [];
+
+function startMemoryTest(){
+  currentMemory = [];
+  while(currentMemory.length<3){
+    let word = memoryWordsList[Math.floor(Math.random()*memoryWordsList.length)];
+    if(!currentMemory.includes(word)) currentMemory.push(word);
+  }
+  document.getElementById('memoryWords').innerText = currentMemory.join('   ');
+  document.getElementById('memoryResult').innerText = '请记住词汇，然后输入顺序';
+}
+
+function checkMemory(){
+  const input = document.getElementById('memoryInput').value.trim().split(/\s+/);
+  if(input.join() === currentMemory.join()){
+    document.getElementById('memoryResult').innerText = '恭喜，记忆正确！';
+  } else {
+    document.getElementById('memoryResult').innerText = '记忆错误，正确答案是：'+currentMemory.join(' ');
   }
 }
 
-// 初始化折叠状态（全部折叠）
-document.querySelectorAll('.content-collapsible').forEach(c=>c.style.display='none');
+// ---------- 简单选择题 ----------
+const quizQuestions = [
+  {q:"阿尔茨海默病最常见的症状是？",options:["记忆力下降","高血压","视力模糊"],answer:0},
+  {q:"预防阿尔茨海默病的有效方法是？",options:["健康饮食","完全卧床","不运动"],answer:0}
+];
 
-// 字体切换
-function toggleFont(){ document.body.classList.toggle('big-font'); }
-
-// 中英文切换
-const contentLang = {
-'zh-CN':{title:'老年痴呆症（阿尔茨海默病）',subtitle:'认识疾病 · 早期发现 · 科学照护'},
-'en':{title:"Alzheimer's Disease",subtitle:"Understanding · Early Detection · Care"}
-};
-function switchLang(){
-  const lang = document.documentElement.lang==='zh-CN'?'en':'zh-CN';
-  document.documentElement.lang = lang;
-  document.getElementById('title').innerText = contentLang[lang].title;
-  document.getElementById('subtitle').innerText = contentLang[lang].subtitle;
+function renderQuiz(){
+  const area = document.getElementById('quizArea');
+  area.innerHTML = '';
+  quizQuestions.forEach((item,i)=>{
+    const div = document.createElement('div');
+    div.innerHTML = `<p>${i+1}. ${item.q}</p>`+item.options.map((opt,j)=>`<label><input type="radio" name="q${i}" value="${j}"/> ${opt}</label>`).join('<br>')+'<br>';
+    area.appendChild(div);
+  });
 }
+
+function checkQuiz(){
+  let correct = 0;
+  quizQuestions.forEach((item,i)=>{
+    const selected = document.querySelector(`input[name=q${i}]:checked`);
+    if(selected && parseInt(selected.value)===item.answer) correct++;
+  });
+  document.getElementById('quizResult').innerText = `你答对了 ${correct}/${quizQuestions.length} 题`;
+}
+
+// ---------- 简单逻辑训练 ----------
+const logicQuestions = [
+  {q:"所有老年痴呆患者都会完全丧失记忆。",answer:false},
+  {q:"适量运动对认知功能有益。",answer:true}
+];
+
+function renderLogic(){
+  const area = document.getElementById('logicArea');
+  area.innerHTML = '';
+  logicQuestions.forEach((item,i)=>{
+    const div = document.createElement('div');
+    div.innerHTML = `<p>${i+1}. ${item.q}</p>`+
+    `<label><input type="radio" name="lq${i}" value="true"/> 正确</label> <label><input type="radio" name="lq${i}" value="false"/> 错误</label><br>`;
+    area.appendChild(div);
+  });
+}
+
+function checkLogic(){
+  let correct = 0;
+  logicQuestions.forEach((item,i)=>{
+    const selected = document.querySelector(`input[name=lq${i}]:checked`);
+    if(selected && ((selected.value==="true")===item.answer)) correct++;
+  });
+  document.getElementById('logicResult').innerText = `你答对了 ${correct}/${logicQuestions.length} 道逻辑题`;
+}
+
+// ---------- 日常健康记录 ----------
+function saveLog(){
+  const log = document.getElementById('healthLog').value.trim();
+  if(log){
+    localStorage.setItem('healthLog', log);
+    document.getElementById('logResult').innerText = '记录已保存（离线可用）';
+  }else document.getElementById('logResult').innerText = '请输入内容再保存';
+}
+
+// ---------- 页面初始化 ----------
+window.onload = ()=>{
+  // 折叠初始化
+  document.querySelectorAll('.content-collapsible').forEach(c=>c.style.display='none');
+  // 加载本地健康记录
+  const saved = localStorage.getItem('healthLog');
+  if(saved) document.getElementById('healthLog').value = saved;
+  // 渲染选择题与逻辑题
+  renderQuiz();
+  renderLogic();
+};
 </script>
-</body>
-</html>
