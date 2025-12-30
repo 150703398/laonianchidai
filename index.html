@@ -2,275 +2,233 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>老年痴呆症（阿尔茨海默病）科普 · 离线版</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tetris Pro</title>
 
 <style>
 body{
   margin:0;
-  font-family:"Microsoft YaHei",Arial,sans-serif;
-  background:#f5f7fa;
-  color:#222;
-  line-height:1.8;
+  background:#020617;
+  color:#e5e7eb;
+  font-family:system-ui;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+}
+.wrap{
+  background:#020617;
+  padding:16px;
+  border-radius:16px;
+  box-shadow:0 30px 80px rgba(0,0,0,.7);
+}
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+}
+select,button{
+  background:#0f172a;
+  color:#e5e7eb;
+  border:1px solid #1e293b;
+  padding:6px 10px;
+  border-radius:8px;
+}
+canvas{
+  background:#020617;
+  display:block;
+  border-radius:10px;
+}
+.info{
+  display:flex;
+  justify-content:space-between;
+  margin-top:8px;
+}
+.touch{
+  display:grid;
+  grid-template-columns:repeat(3,60px);
+  gap:8px;
+  justify-content:center;
+  margin-top:12px;
+}
+.touch button{
+  height:48px;
   font-size:18px;
 }
-header{
-  background:#1f4fd8;
-  color:#fff;
-  padding:30px 15px;
-  text-align:center;
-}
-.toolbar{
-  display:flex;
-  gap:10px;
-  justify-content:center;
-  flex-wrap:wrap;
-  padding:12px;
-  background:#fff;
-  border-bottom:1px solid #ddd;
-}
-button{
-  font-size:16px;
-  padding:8px 14px;
-  border:1px solid #ccc;
-  border-radius:6px;
-  background:#fff;
-  cursor:pointer;
-}
-main{
-  max-width:960px;
-  margin:20px auto;
-  padding:0 15px;
-}
-.section{
-  background:#fff;
-  border-radius:10px;
-  margin-bottom:18px;
-  border:1px solid #e5e5e5;
-  overflow:hidden;
-}
-.section h2{
-  margin:0;
-  padding:18px;
-  background:#f0f3ff;
-  color:#1f4fd8;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  cursor:pointer;
-  user-select:none;
-}
-.arrow{
-  transition:transform .3s ease;
-}
-.section.open .arrow{
-  transform:rotate(90deg);
-}
-.content{
-  max-height:0;
-  overflow:hidden;
-  transition:max-height .4s ease;
-  padding:0 18px;
-}
-.section.open .content{
-  padding:18px;
-  max-height:3000px;
-}
-ul{padding-left:22px}
-.big-font{font-size:22px}
-footer{
-  text-align:center;
-  font-size:14px;
-  color:#666;
-  padding:20px;
-}
-@media print{
-  .toolbar{display:none}
-  body{background:#fff;color:#000;font-size:14px}
-  .section{border:none}
-  .content{max-height:none !important}
-}
-.game-box button{margin:4px}
-.card{
-  width:50px;height:50px;
-  font-size:22px;
+.rank{
+  font-size:12px;
+  margin-top:10px;
+  color:#94a3b8;
 }
 </style>
 </head>
 
 <body>
+<div class="wrap">
+  <div class="top">
+    <select id="mode">
+      <option value="classic">经典模式</option>
+      <option value="time">限时模式</option>
+      <option value="hell">地狱模式</option>
+      <option value="bomb">彩色炸弹</option>
+    </select>
+    <button onclick="toggleMusic()">🎵</button>
+  </div>
 
-<header>
-<h1 id="title">老年痴呆症（阿尔茨海默病）</h1>
-<p id="subtitle">认识疾病 · 早期发现 · 科学照护</p>
-</header>
+  <canvas id="c" width="300" height="600"></canvas>
 
-<div class="toolbar">
-<button onclick="switchLang()">🌍 中文 / English</button>
-<button onclick="toggleFont()">👓 大字模式</button>
-<button onclick="window.print()">🖨 打印 / PDF</button>
-</div>
+  <div class="info">
+    <div>分数 <span id="score">0</span></div>
+    <div>时间 <span id="time">--</span></div>
+  </div>
 
-<main>
+  <div class="touch">
+    <button onclick="move(-1)">←</button>
+    <button onclick="rotate()">⟳</button>
+    <button onclick="move(1)">→</button>
+    <button onclick="drop()">↓</button>
+    <button onclick="hardDrop()">⤓</button>
+    <button onclick="reset()">⟲</button>
+  </div>
 
-<!-- 1 -->
-<div class="section">
-<h2 onclick="toggle(this)">什么是老年痴呆症？ <span class="arrow">▶</span></h2>
-<div class="content">
-<p>老年痴呆症通常指阿尔茨海默病，是一种慢性、进行性的神经退行性疾病，并非正常衰老。</p>
-<p>其主要病理改变包括 β-淀粉样蛋白沉积和 Tau 蛋白缠结，最终导致神经元死亡和大脑萎缩。</p>
+  <div class="rank" id="rank"></div>
 </div>
-</div>
-
-<!-- 2 -->
-<div class="section">
-<h2 onclick="toggle(this)">疾病进程分期 <span class="arrow">▶</span></h2>
-<div class="content">
-<ul>
-<li><b>早期：</b>健忘、注意力下降、偶尔迷路</li>
-<li><b>中期：</b>语言障碍、判断力下降、需他人协助</li>
-<li><b>晚期：</b>完全依赖照护、行动受限</li>
-</ul>
-<p>不同患者进展速度不同，早期干预尤为重要。</p>
-</div>
-</div>
-
-<!-- 3 -->
-<div class="section">
-<h2 onclick="toggle(this)">家庭照护指南 <span class="arrow">▶</span></h2>
-<div class="content">
-<ul>
-<li>规律作息，减少环境变化</li>
-<li>防跌倒、防走失、防误服药物</li>
-<li>沟通时语句简短，避免争辩</li>
-</ul>
-<p>良好的家庭支持能显著改善患者生活质量。</p>
-</div>
-</div>
-
-<!-- 4 -->
-<div class="section">
-<h2 onclick="toggle(this)">预防与风险管理 <span class="arrow">▶</span></h2>
-<div class="content">
-<ul>
-<li>健康饮食（地中海饮食）</li>
-<li>规律运动</li>
-<li>脑力训练与社交活动</li>
-</ul>
-<p>控制高血压、糖尿病等慢性病有助于降低风险。</p>
-</div>
-</div>
-
-<!-- 5 -->
-<div class="section">
-<h2 onclick="toggle(this)">常见误区 <span class="arrow">▶</span></h2>
-<div class="content">
-<ul>
-<li>不是所有健忘都是正常老化</li>
-<li>药物无法治愈，但可延缓进展</li>
-</ul>
-</div>
-</div>
-
-<!-- 6 -->
-<div class="section">
-<h2 onclick="toggle(this)">照护者心理支持 <span class="arrow">▶</span></h2>
-<div class="content">
-<p>照护者容易出现压力和倦怠，应主动寻求家人、社区和专业机构支持。</p>
-</div>
-</div>
-
-<!-- 7 -->
-<div class="section">
-<h2 onclick="toggle(this)">研究进展与前沿 <span class="arrow">▶</span></h2>
-<div class="content">
-<p>当前研究方向包括早期筛查、生物标志物、新型药物及生活方式干预。</p>
-</div>
-</div>
-
-<!-- 8 -->
-<div class="section">
-<h2 onclick="toggle(this)">互动小工具（离线小游戏） <span class="arrow">▶</span></h2>
-<div class="content game-box">
-
-<h3>🧠 记忆匹配</h3>
-<div id="cards"></div>
-<button onclick="startMemory()">重新开始</button>
-
-<h3>🔢 数字回忆</h3>
-<p id="numShow">点击开始</p>
-<input id="numInput" placeholder="输入数字">
-<button onclick="startNum()">开始</button>
-<button onclick="checkNum()">提交</button>
-<p id="numResult"></p>
-
-</div>
-</div>
-
-</main>
-
-<footer>
-<p>完全离线科普网页 | 可长期保存使用</p>
-</footer>
 
 <script>
-function toggle(el){
-  el.parentElement.classList.toggle('open');
-}
-function toggleFont(){
-  document.body.classList.toggle('big-font');
+/* ========= 音效 ========= */
+const audio = new AudioContext();
+let musicOn=true;
+function beep(freq,d=0.08){
+  if(!musicOn) return;
+  const o=audio.createOscillator(),g=audio.createGain();
+  o.connect(g); g.connect(audio.destination);
+  o.frequency.value=freq;
+  g.gain.value=.08;
+  o.start(); o.stop(audio.currentTime+d);
 }
 
-/* 简化中英文切换（标题示例） */
-function switchLang(){
-  const t=document.getElementById('title');
-  if(t.innerText.includes('老年')){
-    t.innerText="Alzheimer's Disease";
-    document.getElementById('subtitle').innerText="Understanding · Care · Support";
-  }else{
-    t.innerText="老年痴呆症（阿尔茨海默病）";
-    document.getElementById('subtitle').innerText="认识疾病 · 早期发现 · 科学照护";
+/* ========= 游戏参数 ========= */
+const cvs=c.getContext("2d");
+const COL=10,ROW=20,S=30;
+let board,cur,score=0,mode="classic",time=120,dropSpeed=800,timer;
+
+/* ========= 方块 ========= */
+const colors=["", "#22d3ee","#a78bfa","#34d399","#facc15","#fb7185","#60a5fa","#f97316","#fde047"];
+const shapes=[
+  [[1,1,1,1]],
+  [[2,0,0],[2,2,2]],
+  [[0,3,3],[3,3,0]],
+  [[4,4],[4,4]],
+  [[0,5,0],[5,5,5]],
+  [[6,6,0],[0,6,6]],
+  [[7,7,7],[0,7,0]],
+  [[8]]
+];
+
+/* ========= 核心 ========= */
+function reset(){
+  board=Array.from({length:ROW},()=>Array(COL).fill(0));
+  score=0; time=120;
+  newPiece();
+  clearInterval(timer);
+  if(mode==="time"){
+    timer=setInterval(()=>{time--;if(time<=0)gameOver()},1000);
   }
 }
-
-/* 记忆匹配 */
-let first=null;
-function startMemory(){
-  const arr=['🍎','🍌','🍇','🍒'];
-  const cards=[...arr,...arr].sort(()=>0.5-Math.random());
-  const box=document.getElementById('cards');
-  box.innerHTML='';
-  cards.forEach(v=>{
-    const b=document.createElement('button');
-    b.className='card';
-    b.textContent='?';
-    b.onclick=()=>{
-      if(b.textContent!=='?')return;
-      b.textContent=v;
-      if(!first){first=b;}
-      else{
-        if(first.textContent!==v){
-          setTimeout(()=>{b.textContent='?';first.textContent='?';first=null;},600);
-        }else{first=null;}
-      }
-    };
-    box.appendChild(b);
+function newPiece(){
+  let s=shapes[Math.random()*shapes.length|0];
+  cur={s,x:3,y:0};
+  if(hit()) gameOver();
+}
+function hit(){
+  return cur.s.some((r,y)=>r.some((v,x)=>{
+    let px=x+cur.x, py=y+cur.y;
+    return v && (px<0||px>=COL||py>=ROW||board[py]?.[px]);
+  }));
+}
+function merge(){
+  cur.s.forEach((r,y)=>r.forEach((v,x)=>{
+    if(v) board[y+cur.y][x+cur.x]=v;
+  }));
+}
+function clear(){
+  let n=0;
+  board=board.filter(r=>{
+    if(r.every(v=>v)){n++; return false;}
+    return true;
   });
+  while(board.length<ROW) board.unshift(Array(COL).fill(0));
+  if(n){score+=n*100;beep(600);}
 }
-startMemory();
+function drop(){
+  cur.y++;
+  if(hit()){cur.y--;merge();clear();newPiece();}
+}
+function hardDrop(){
+  while(!hit())cur.y++;
+  cur.y--;merge();clear();newPiece();
+}
+function move(d){
+  cur.x+=d;
+  if(hit()) cur.x-=d;
+}
+function rotate(){
+  cur.s=cur.s[0].map((_,i)=>cur.s.map(r=>r[i]).reverse());
+  if(hit()) cur.s=cur.s[0].map((_,i)=>cur.s.map(r=>r[r.length-1-i]));
+}
 
-/* 数字回忆 */
-let cur='';
-function startNum(){
-  cur=Math.floor(Math.random()*90000+10000).toString();
-  document.getElementById('numShow').innerText=cur;
-  setTimeout(()=>document.getElementById('numShow').innerText='请输入记住的数字',2500);
+/* ========= 渲染 ========= */
+function draw(){
+  cvs.clearRect(0,0,300,600);
+  board.forEach((r,y)=>r.forEach((v,x)=>{
+    if(v){cvs.fillStyle=colors[v];cvs.fillRect(x*S,y*S,S-1,S-1);}
+  }));
+  cur.s.forEach((r,y)=>r.forEach((v,x)=>{
+    if(v){cvs.fillStyle=colors[v];cvs.fillRect((x+cur.x)*S,(y+cur.y)*S,S-1,S-1);}
+  }));
+  scoreEl.innerText=score;
+  timeEl.innerText=mode==="time"?time:"∞";
 }
-function checkNum(){
-  document.getElementById('numResult').innerText=
-    document.getElementById('numInput').value===cur?'正确 🎉':'错误，答案是 '+cur;
+
+/* ========= 排行榜 ========= */
+function saveRank(){
+  let k="tetris-"+mode;
+  let r=JSON.parse(localStorage.getItem(k)||"[]");
+  r.push(score); r.sort((a,b)=>b-a); r=r.slice(0,5);
+  localStorage.setItem(k,JSON.stringify(r));
+  rank.innerHTML="排行榜："+r.join(" / ");
 }
+
+/* ========= 结束 ========= */
+function gameOver(){
+  saveRank();
+  beep(120,0.4);
+  alert("游戏结束");
+  reset();
+}
+
+/* ========= 循环 ========= */
+let last=0;
+function loop(t){
+  if(t-last>dropSpeed){drop();last=t;}
+  draw();
+  requestAnimationFrame(loop);
+}
+
+/* ========= 控制 ========= */
+document.onkeydown=e=>{
+  if(e.key==="ArrowLeft")move(-1);
+  if(e.key==="ArrowRight")move(1);
+  if(e.key==="ArrowDown")drop();
+  if(e.key==="ArrowUp")rotate();
+  if(e.key===" ")hardDrop();
+};
+modeSel.onchange=e=>{mode=e.target.value;dropSpeed=mode==="hell"?200:800;reset();};
+function toggleMusic(){musicOn=!musicOn;}
+
+/* ========= 启动 ========= */
+reset(); loop();
 </script>
-
 </body>
 </html>
