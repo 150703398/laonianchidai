@@ -1,116 +1,276 @@
-<section>
-<h2 onclick="toggleSection(this)">互动小工具（离线可用）</h2>
-<div class="content-collapsible">
-<p>以下小游戏可离线操作，适合认知训练：</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>老年痴呆症（阿尔茨海默病）科普 · 离线版</title>
 
-<h3>1. 记忆匹配游戏</h3>
-<div id="memoryGame" style="margin-bottom:15px;">
-  <p>点击卡片翻面，匹配相同内容。</p>
-  <div id="cards" style="display:flex;flex-wrap:wrap;gap:5px;"></div>
-  <button onclick="startMemoryGame()">重新开始</button>
+<style>
+body{
+  margin:0;
+  font-family:"Microsoft YaHei",Arial,sans-serif;
+  background:#f5f7fa;
+  color:#222;
+  line-height:1.8;
+  font-size:18px;
+}
+header{
+  background:#1f4fd8;
+  color:#fff;
+  padding:30px 15px;
+  text-align:center;
+}
+.toolbar{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+  padding:12px;
+  background:#fff;
+  border-bottom:1px solid #ddd;
+}
+button{
+  font-size:16px;
+  padding:8px 14px;
+  border:1px solid #ccc;
+  border-radius:6px;
+  background:#fff;
+  cursor:pointer;
+}
+main{
+  max-width:960px;
+  margin:20px auto;
+  padding:0 15px;
+}
+.section{
+  background:#fff;
+  border-radius:10px;
+  margin-bottom:18px;
+  border:1px solid #e5e5e5;
+  overflow:hidden;
+}
+.section h2{
+  margin:0;
+  padding:18px;
+  background:#f0f3ff;
+  color:#1f4fd8;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  cursor:pointer;
+  user-select:none;
+}
+.arrow{
+  transition:transform .3s ease;
+}
+.section.open .arrow{
+  transform:rotate(90deg);
+}
+.content{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .4s ease;
+  padding:0 18px;
+}
+.section.open .content{
+  padding:18px;
+  max-height:3000px;
+}
+ul{padding-left:22px}
+.big-font{font-size:22px}
+footer{
+  text-align:center;
+  font-size:14px;
+  color:#666;
+  padding:20px;
+}
+@media print{
+  .toolbar{display:none}
+  body{background:#fff;color:#000;font-size:14px}
+  .section{border:none}
+  .content{max-height:none !important}
+}
+.game-box button{margin:4px}
+.card{
+  width:50px;height:50px;
+  font-size:22px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1 id="title">老年痴呆症（阿尔茨海默病）</h1>
+<p id="subtitle">认识疾病 · 早期发现 · 科学照护</p>
+</header>
+
+<div class="toolbar">
+<button onclick="switchLang()">🌍 中文 / English</button>
+<button onclick="toggleFont()">👓 大字模式</button>
+<button onclick="window.print()">🖨 打印 / PDF</button>
 </div>
 
-<h3>2. 数字回忆游戏</h3>
-<div id="numberGame" style="margin-bottom:15px;">
-  <p id="numberDisplay">点击开始显示随机数字</p>
-  <input type="text" id="numberInput" placeholder="输入记住的数字" style="width:200px;padding:4px"/>
-  <button onclick="startNumberGame()">开始</button>
-  <button onclick="checkNumberGame()">提交答案</button>
-  <p id="numberResult"></p>
+<main>
+
+<!-- 1 -->
+<div class="section">
+<h2 onclick="toggle(this)">什么是老年痴呆症？ <span class="arrow">▶</span></h2>
+<div class="content">
+<p>老年痴呆症通常指阿尔茨海默病，是一种慢性、进行性的神经退行性疾病，并非正常衰老。</p>
+<p>其主要病理改变包括 β-淀粉样蛋白沉积和 Tau 蛋白缠结，最终导致神经元死亡和大脑萎缩。</p>
+</div>
 </div>
 
-<h3>3. 简单逻辑题</h3>
-<div id="logicGame" style="margin-bottom:15px;">
-  <p id="logicQuestion">点击“下一题”开始</p>
-  <button onclick="nextLogicQuestion()">下一题</button>
-  <div id="logicOptions" style="margin-top:5px;"></div>
-  <p id="logicResult"></p>
+<!-- 2 -->
+<div class="section">
+<h2 onclick="toggle(this)">疾病进程分期 <span class="arrow">▶</span></h2>
+<div class="content">
+<ul>
+<li><b>早期：</b>健忘、注意力下降、偶尔迷路</li>
+<li><b>中期：</b>语言障碍、判断力下降、需他人协助</li>
+<li><b>晚期：</b>完全依赖照护、行动受限</li>
+</ul>
+<p>不同患者进展速度不同，早期干预尤为重要。</p>
 </div>
+</div>
+
+<!-- 3 -->
+<div class="section">
+<h2 onclick="toggle(this)">家庭照护指南 <span class="arrow">▶</span></h2>
+<div class="content">
+<ul>
+<li>规律作息，减少环境变化</li>
+<li>防跌倒、防走失、防误服药物</li>
+<li>沟通时语句简短，避免争辩</li>
+</ul>
+<p>良好的家庭支持能显著改善患者生活质量。</p>
+</div>
+</div>
+
+<!-- 4 -->
+<div class="section">
+<h2 onclick="toggle(this)">预防与风险管理 <span class="arrow">▶</span></h2>
+<div class="content">
+<ul>
+<li>健康饮食（地中海饮食）</li>
+<li>规律运动</li>
+<li>脑力训练与社交活动</li>
+</ul>
+<p>控制高血压、糖尿病等慢性病有助于降低风险。</p>
+</div>
+</div>
+
+<!-- 5 -->
+<div class="section">
+<h2 onclick="toggle(this)">常见误区 <span class="arrow">▶</span></h2>
+<div class="content">
+<ul>
+<li>不是所有健忘都是正常老化</li>
+<li>药物无法治愈，但可延缓进展</li>
+</ul>
+</div>
+</div>
+
+<!-- 6 -->
+<div class="section">
+<h2 onclick="toggle(this)">照护者心理支持 <span class="arrow">▶</span></h2>
+<div class="content">
+<p>照护者容易出现压力和倦怠，应主动寻求家人、社区和专业机构支持。</p>
+</div>
+</div>
+
+<!-- 7 -->
+<div class="section">
+<h2 onclick="toggle(this)">研究进展与前沿 <span class="arrow">▶</span></h2>
+<div class="content">
+<p>当前研究方向包括早期筛查、生物标志物、新型药物及生活方式干预。</p>
+</div>
+</div>
+
+<!-- 8 -->
+<div class="section">
+<h2 onclick="toggle(this)">互动小工具（离线小游戏） <span class="arrow">▶</span></h2>
+<div class="content game-box">
+
+<h3>🧠 记忆匹配</h3>
+<div id="cards"></div>
+<button onclick="startMemory()">重新开始</button>
+
+<h3>🔢 数字回忆</h3>
+<p id="numShow">点击开始</p>
+<input id="numInput" placeholder="输入数字">
+<button onclick="startNum()">开始</button>
+<button onclick="checkNum()">提交</button>
+<p id="numResult"></p>
+
+</div>
+</div>
+
+</main>
+
+<footer>
+<p>完全离线科普网页 | 可长期保存使用</p>
+</footer>
 
 <script>
-// ---------- 记忆匹配 ----------
-let memoryCards=[];
-function startMemoryGame(){
-  const container = document.getElementById('cards');
-  container.innerHTML='';
-  const items=['🍎','🍌','🍒','🍇','🍉'];
-  memoryCards=[...items,...items]; // 两份
-  memoryCards.sort(()=>0.5-Math.random());
-  memoryCards.forEach((c,i)=>{
-    const card=document.createElement('button');
-    card.textContent='❓';
-    card.style.width='50px'; card.style.height='50px'; card.style.fontSize='24px';
-    card.dataset.value=memoryCards[i];
-    card.dataset.flipped='false';
-    card.onclick=()=>flipCard(card);
-    container.appendChild(card);
-  });
-  window.firstCard=null;
+function toggle(el){
+  el.parentElement.classList.toggle('open');
 }
-function flipCard(card){
-  if(card.dataset.flipped==='true') return;
-  card.textContent=card.dataset.value;
-  card.dataset.flipped='true';
-  if(!window.firstCard){
-    window.firstCard=card;
-  } else {
-    if(window.firstCard.dataset.value===card.dataset.value){
-      window.firstCard.disabled=true;
-      card.disabled=true;
-      window.firstCard=null;
-    } else {
-      setTimeout(()=>{
-        window.firstCard.textContent='❓'; window.firstCard.dataset.flipped='false';
-        card.textContent='❓'; card.dataset.flipped='false';
-        window.firstCard=null;
-      },800);
-    }
+function toggleFont(){
+  document.body.classList.toggle('big-font');
+}
+
+/* 简化中英文切换（标题示例） */
+function switchLang(){
+  const t=document.getElementById('title');
+  if(t.innerText.includes('老年')){
+    t.innerText="Alzheimer's Disease";
+    document.getElementById('subtitle').innerText="Understanding · Care · Support";
+  }else{
+    t.innerText="老年痴呆症（阿尔茨海默病）";
+    document.getElementById('subtitle').innerText="认识疾病 · 早期发现 · 科学照护";
   }
 }
 
-// ---------- 数字回忆 ----------
-let currentNumber='';
-function startNumberGame(){
-  const len=5;
-  currentNumber='';
-  for(let i=0;i<len;i++) currentNumber+=Math.floor(Math.random()*10);
-  document.getElementById('numberDisplay').textContent=currentNumber;
-  document.getElementById('numberInput').value='';
-  document.getElementById('numberResult').textContent='';
-  setTimeout(()=>document.getElementById('numberDisplay').textContent='请记住的数字显示完毕',3000);
-}
-function checkNumberGame(){
-  const user=document.getElementById('numberInput').value;
-  if(user===currentNumber) document.getElementById('numberResult').textContent='正确！🎉';
-  else document.getElementById('numberResult').textContent=`错误，正确答案是 ${currentNumber}`;
-}
-
-// ---------- 逻辑题 ----------
-const logicQuestions=[
-  {q:'太阳从哪边升起？',options:['东','西'],a:0},
-  {q:'1+1=?',options:['1','2','3'],a:1},
-  {q:'猫属于哪类动物？',options:['哺乳类','爬行类'],a:0}
-];
-let logicIndex=-1;
-function nextLogicQuestion(){
-  logicIndex=(logicIndex+1)%logicQuestions.length;
-  const q=logicQuestions[logicIndex];
-  document.getElementById('logicQuestion').textContent=q.q;
-  const optsDiv=document.getElementById('logicOptions');
-  optsDiv.innerHTML='';
-  q.options.forEach((opt,i)=>{
-    const btn=document.createElement('button');
-    btn.textContent=opt;
-    btn.style.margin='2px';
-    btn.onclick=()=>{ 
-      if(i===q.a) document.getElementById('logicResult').textContent='回答正确！🎉';
-      else document.getElementById('logicResult').textContent='回答错误 😢';
+/* 记忆匹配 */
+let first=null;
+function startMemory(){
+  const arr=['🍎','🍌','🍇','🍒'];
+  const cards=[...arr,...arr].sort(()=>0.5-Math.random());
+  const box=document.getElementById('cards');
+  box.innerHTML='';
+  cards.forEach(v=>{
+    const b=document.createElement('button');
+    b.className='card';
+    b.textContent='?';
+    b.onclick=()=>{
+      if(b.textContent!=='?')return;
+      b.textContent=v;
+      if(!first){first=b;}
+      else{
+        if(first.textContent!==v){
+          setTimeout(()=>{b.textContent='?';first.textContent='?';first=null;},600);
+        }else{first=null;}
+      }
     };
-    optsDiv.appendChild(btn);
+    box.appendChild(b);
   });
-  document.getElementById('logicResult').textContent='';
+}
+startMemory();
+
+/* 数字回忆 */
+let cur='';
+function startNum(){
+  cur=Math.floor(Math.random()*90000+10000).toString();
+  document.getElementById('numShow').innerText=cur;
+  setTimeout(()=>document.getElementById('numShow').innerText='请输入记住的数字',2500);
+}
+function checkNum(){
+  document.getElementById('numResult').innerText=
+    document.getElementById('numInput').value===cur?'正确 🎉':'错误，答案是 '+cur;
 }
 </script>
 
-</div>
-</section>
+</body>
+</html>
