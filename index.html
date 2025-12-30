@@ -15,6 +15,8 @@ main{max-width:960px;margin:20px auto;padding:0 15px}
 section{background:#fff;border-radius:10px;padding:24px;margin-bottom:22px;border:1px solid #e5e5e5}
 h2{color:#1f4fd8;margin-top:0}
 ul{padding-left:22px}
+.img-box{text-align:center;margin:20px 0}
+.img-box canvas{max-width:100%;border-radius:8px;display:block;margin:0 auto;background:#eee}
 body.big-font{font-size:22px}
 footer{text-align:center;font-size:14px;color:#666;padding:20px}
 @media print{.toolbar{display:none}body{background:#fff;color:#000;font-size:14px}}
@@ -37,73 +39,58 @@ footer{text-align:center;font-size:14px;color:#666;padding:20px}
 <h2 id="sec1-title">什么是老年痴呆症？</h2>
 <p id="sec1-p1">老年痴呆症通常指阿尔茨海默病，是一种慢性、进行性的神经退行性疾病，并非正常衰老。</p>
 <p id="sec1-p2">病理机制包括β-淀粉样蛋白沉积、tau蛋白缠结，导致神经元逐渐死亡和大脑萎缩。</p>
+<div class="img-box">
+<canvas id="canvasBrain" width="600" height="300"></canvas>
+</div>
 </section>
 
 <section>
 <h2 id="sec2-title">疾病进程分期</h2>
-<ul id="sec2-list">
-<li>早期：轻度记忆力下降、偶尔迷路、日常生活自理能力基本正常</li>
-<li>中期：认知功能明显下降、语言表达困难、日常生活需帮助</li>
-<li>晚期：完全依赖照护、行动能力受限、可能出现失禁</li>
-</ul>
+<ul id="sec2-list"></ul>
+<div class="img-box">
+<canvas id="canvasStages" width="600" height="300"></canvas>
+</div>
 </section>
 
 <section>
 <h2 id="sec3-title">家庭照护指南</h2>
-<ul id="sec3-list">
-<li>饮食安排：低盐低脂、高蛋白、补充DHA</li>
-<li>日常活动：散步、园艺、轻运动</li>
-<li>安全防护：防跌倒、防走失、防误食药物</li>
-<li>沟通技巧：用简单句子、耐心倾听、正面鼓励</li>
-<li>心理支持：陪伴与互动，避免孤独和抑郁</li>
-<li>日常认知训练：记忆游戏、简单手工、阅读活动</li>
-</ul>
+<ul id="sec3-list"></ul>
+<div class="img-box">
+<canvas id="canvasCare" width="600" height="300"></canvas>
+</div>
 </section>
 
 <section>
 <h2 id="sec4-title">预防措施</h2>
-<ul id="sec4-list">
-<li>健康饮食：多蔬菜水果、坚果、全谷类和深海鱼</li>
-<li>适量运动：每天30分钟有氧运动，如快走、游泳、骑车</li>
-<li>脑力锻炼：阅读、写作、下棋、学习新技能</li>
-<li>规律作息：保证充足睡眠，避免熬夜</li>
-<li>心理健康：保持社交活动，参加兴趣小组</li>
-<li>控制心脑血管风险：管理高血压、高血脂、糖尿病</li>
-</ul>
+<ul id="sec4-list"></ul>
+<div class="img-box">
+<canvas id="canvasPrevent" width="600" height="300"></canvas>
+</div>
 </section>
 
 <section>
 <h2 id="sec5-title">心理与社会支持</h2>
-<ul id="sec5-list">
-<li>家属压力缓解：加入互助群、心理咨询</li>
-<li>志愿者及社区资源：养老院、日间照护中心、支持群体</li>
-<li>法律与财务规划：提前安排监护、资产管理</li>
-<li>保持社交活动：参与兴趣班、社区活动，减少孤独感</li>
-</ul>
+<ul id="sec5-list"></ul>
+<div class="img-box">
+<canvas id="canvasSocial" width="600" height="300"></canvas>
+</div>
 </section>
 
 <section>
 <h2 id="sec6-title">常见误区</h2>
-<ul id="sec6-list">
-<li>老年痴呆就是正常衰老 —— 实际是疾病，可早期干预</li>
-<li>药物能治愈 —— 药物只能延缓症状发展</li>
-<li>运动无关 —— 适量运动对脑健康非常重要</li>
-<li>家族无病例就不必担心 —— 多种因素可影响风险</li>
-</ul>
+<ul id="sec6-list"></ul>
+<div class="img-box">
+<canvas id="canvasMistake" width="600" height="300"></canvas>
+</div>
 </section>
 
 <section>
 <h2 id="sec7-title">实用资源与参考资料</h2>
-<ul id="sec7-list">
-<li>书籍推荐：《阿尔茨海默病自助手册》《科学照护老年痴呆症》《脑健康与认知训练》</li>
-<li>官方指南：世界卫生组织（WHO）老年痴呆症指南、中国老年学和老年医学学会指南</li>
-<li>离线科普网站资料：PDF、HTML手册</li>
-<li>视频教程：认知训练视频、护理技巧教学</li>
-<li>社区与互助：本地养老机构、日间照护中心、志愿者支持群</li>
-<li>医学期刊：可下载离线阅读的阿尔茨海默病研究论文PDF</li>
-</ul>
+<ul id="sec7-list"></ul>
+<div class="img-box">
+<canvas id="canvasResource" width="600" height="300"></canvas>
+</div>
 </section>
-
 </main>
 
 <footer>
@@ -112,28 +99,28 @@ footer{text-align:center;font-size:14px;color:#666;padding:20px}
 
 <script>
 const content = {
-  'zh-CN': {
-    title:'老年痴呆症（阿尔茨海默病）',
-    subtitle:'认识疾病 · 早期发现 · 科学照护',
-    sec1:{title:'什么是老年痴呆症？', p1:'老年痴呆症通常指阿尔茨海默病，是一种慢性、进行性的神经退行性疾病，并非正常衰老。', p2:'病理机制包括β-淀粉样蛋白沉积、tau蛋白缠结，导致神经元逐渐死亡和大脑萎缩。'},
-    sec2:{title:'疾病进程分期', list:['早期：轻度记忆力下降、偶尔迷路、日常生活自理能力基本正常','中期：认知功能明显下降、语言表达困难、日常生活需帮助','晚期：完全依赖照护、行动能力受限、可能出现失禁']},
-    sec3:{title:'家庭照护指南', list:['饮食安排：低盐低脂、高蛋白、补充DHA','日常活动：散步、园艺、轻运动','安全防护：防跌倒、防走失、防误食药物','沟通技巧：用简单句子、耐心倾听、正面鼓励','心理支持：陪伴与互动，避免孤独和抑郁','日常认知训练：记忆游戏、简单手工、阅读活动']},
-    sec4:{title:'预防措施', list:['健康饮食：多蔬菜水果、坚果、全谷类和深海鱼','适量运动：每天30分钟有氧运动，如快走、游泳、骑车','脑力锻炼：阅读、写作、下棋、学习新技能','规律作息：保证充足睡眠，避免熬夜','心理健康：保持社交活动，参加兴趣小组','控制心脑血管风险：管理高血压、高血脂、糖尿病']},
-    sec5:{title:'心理与社会支持', list:['家属压力缓解：加入互助群、心理咨询','志愿者及社区资源：养老院、日间照护中心、支持群体','法律与财务规划：提前安排监护、资产管理','保持社交活动：参与兴趣班、社区活动，减少孤独感']},
-    sec6:{title:'常见误区', list:['老年痴呆就是正常衰老 —— 实际是疾病，可早期干预','药物能治愈 —— 药物只能延缓症状发展','运动无关 —— 适量运动对脑健康非常重要','家族无病例就不必担心 —— 多种因素可影响风险']},
-    sec7:{title:'实用资源与参考资料', list:['书籍推荐：《阿尔茨海默病自助手册》《科学照护老年痴呆症》《脑健康与认知训练》','官方指南：世界卫生组织（WHO）老年痴呆症指南、中国老年学和老年医学学会指南','离线科普网站资料：PDF、HTML手册','视频教程：认知训练视频、护理技巧教学','社区与互助：本地养老机构、日间照护中心、志愿者支持群','医学期刊：可下载离线阅读的阿尔茨海默病研究论文PDF']}
-  },
-  'en': {
-    title:"Alzheimer's Disease",
-    subtitle:"Understanding · Early Detection · Care",
-    sec1:{title:"What is Alzheimer's Disease?", p1:"Alzheimer's disease is a chronic, progressive neurodegenerative disorder affecting memory, thinking, judgment, and daily life abilities.", p2:"Pathological mechanisms include beta-amyloid protein deposition and tau protein tangles, causing neuronal death and brain atrophy."},
-    sec2:{title:"Disease Stages", list:["Early: Mild memory loss, occasional disorientation, daily life mostly independent","Middle: Significant cognitive decline, difficulty expressing, need assistance in daily life","Late: Fully dependent, limited mobility, possible incontinence"]},
-    sec3:{title:"Home Care Guidelines", list:["Diet plan: Low salt and fat, high protein, supplement DHA","Daily activities: Walking, gardening, light exercise","Safety: Prevent falls, wandering, accidental ingestion of medications","Communication: Use simple sentences, listen patiently, encourage positively","Psychological support: Accompany and interact, avoid loneliness and depression","Cognitive training: Memory games, simple crafts, reading activities"]},
-    sec4:{title:"Prevention Measures", list:["Healthy diet: More vegetables, fruits, nuts, whole grains and fatty fish","Moderate exercise: 30 minutes aerobic exercise daily, e.g., walking, swimming, cycling","Brain training: Reading, writing, chess, learning new skills","Regular schedule: Ensure adequate sleep, avoid staying up late","Mental health: Maintain social activities, join interest groups","Control cardiovascular risks: Manage hypertension, hyperlipidemia, diabetes"]},
-    sec5:{title:"Psychological & Social Support", list:["Reduce caregiver stress: Join support groups, seek psychological counseling","Volunteer and community resources: Nursing homes, day care centers, support groups","Legal & financial planning: Arrange guardianship and asset management in advance","Maintain social activities: Participate in classes, community events to reduce loneliness"]},
-    sec6:{title:"Common Misconceptions", list:["Alzheimer's is normal aging — It is a disease and early intervention is possible","Medication can cure — Drugs only slow symptom progression","Exercise is irrelevant — Proper exercise is important for brain health","No family history — Multiple factors affect risk"]},
-    sec7:{title:"Practical Resources & References", list:["Books: 'Alzheimer's Disease Self-Help Handbook', 'Scientific Care for Alzheimer's', 'Brain Health and Cognitive Training'","Official Guidelines: WHO Alzheimer guidelines, Chinese Geriatrics Society Guidelines","Offline materials: PDF, HTML manuals","Video tutorials: Cognitive training videos, caregiving skills tutorials","Community & support: Local nursing homes, day-care centers, volunteer groups","Medical journals: Downloadable Alzheimer's research papers PDF"]}
-  }
+'zh-CN': {
+title:'老年痴呆症（阿尔茨海默病）',
+subtitle:'认识疾病 · 早期发现 · 科学照护',
+sec1:{title:'什么是老年痴呆症？', p1:'老年痴呆症通常指阿尔茨海默病，是一种慢性、进行性的神经退行性疾病，并非正常衰老。', p2:'病理机制包括β-淀粉样蛋白沉积、tau蛋白缠结，导致神经元逐渐死亡和大脑萎缩。'},
+sec2:{title:'疾病进程分期', list:['早期：轻度记忆力下降、偶尔迷路、日常生活自理能力基本正常','中期：认知功能明显下降、语言表达困难、日常生活需帮助','晚期：完全依赖照护、行动能力受限、可能出现失禁']},
+sec3:{title:'家庭照护指南', list:['饮食安排：低盐低脂、高蛋白、补充DHA','日常活动：散步、园艺、轻运动','安全防护：防跌倒、防走失、防误食药物','沟通技巧：用简单句子、耐心倾听、正面鼓励','心理支持：陪伴与互动，避免孤独和抑郁','日常认知训练：记忆游戏、简单手工、阅读活动']},
+sec4:{title:'预防措施', list:['健康饮食：多蔬菜水果、坚果、全谷类和深海鱼','适量运动：每天30分钟有氧运动，如快走、游泳、骑车','脑力锻炼：阅读、写作、下棋、学习新技能','规律作息：保证充足睡眠，避免熬夜','心理健康：保持社交活动，参加兴趣小组','控制心脑血管风险：管理高血压、高血脂、糖尿病']},
+sec5:{title:'心理与社会支持', list:['家属压力缓解：加入互助群、心理咨询','志愿者及社区资源：养老院、日间照护中心、支持群体','法律与财务规划：提前安排监护、资产管理','保持社交活动：参与兴趣班、社区活动，减少孤独感']},
+sec6:{title:'常见误区', list:['老年痴呆就是正常衰老 —— 实际是疾病，可早期干预','药物能治愈 —— 药物只能延缓症状发展','运动无关 —— 适量运动对脑健康非常重要','家族无病例就不必担心 —— 多种因素可影响风险']},
+sec7:{title:'实用资源与参考资料', list:['书籍推荐：《阿尔茨海默病自助手册》《科学照护老年痴呆症》《脑健康与认知训练》','官方指南：世界卫生组织（WHO）老年痴呆症指南、中国老年学和老年医学学会指南','离线科普网站资料：PDF、HTML手册','视频教程：认知训练视频、护理技巧教学','社区与互助：本地养老机构、日间照护中心、志愿者支持群','医学期刊：可下载离线阅读的阿尔茨海默病研究论文PDF']}
+},
+'en': {
+title:"Alzheimer's Disease",
+subtitle:"Understanding · Early Detection · Care",
+sec1:{title:"What is Alzheimer's Disease?", p1:"Alzheimer's disease is a chronic, progressive neurodegenerative disorder affecting memory, thinking, judgment, and daily life abilities.", p2:"Pathological mechanisms include beta-amyloid protein deposition and tau protein tangles, causing neuronal death and brain atrophy."},
+sec2:{title:"Disease Stages", list:["Early: Mild memory loss, occasional disorientation, daily life mostly independent","Middle: Significant cognitive decline, difficulty expressing, need assistance in daily life","Late: Fully dependent, limited mobility, possible incontinence"]},
+sec3:{title:"Home Care Guidelines", list:["Diet plan: Low salt and fat, high protein, supplement DHA","Daily activities: Walking, gardening, light exercise","Safety: Prevent falls, wandering, accidental ingestion of medications","Communication: Use simple sentences, listen patiently, encourage positively","Psychological support: Accompany and interact, avoid loneliness and depression","Cognitive training: Memory games, simple crafts, reading activities"]},
+sec4:{title:"Prevention Measures", list:["Healthy diet: More vegetables, fruits, nuts, whole grains and fatty fish","Moderate exercise: 30 minutes aerobic exercise daily, e.g., walking, swimming, cycling","Brain training: Reading, writing, chess, learning new skills","Regular schedule: Ensure adequate sleep, avoid staying up late","Mental health: Maintain social activities, join interest groups","Control cardiovascular risks: Manage hypertension, hyperlipidemia, diabetes"]},
+sec5:{title:"Psychological & Social Support", list:["Reduce caregiver stress: Join support groups, seek psychological counseling","Volunteer and community resources: Nursing homes, day care centers, support groups","Legal & financial planning: Arrange guardianship and asset management in advance","Maintain social activities: Participate in classes, community events to reduce loneliness"]},
+sec6:{title:"Common Misconceptions", list:["Alzheimer's is normal aging — It is a disease and early intervention is possible","Medication can cure — Drugs only slow symptom progression","Exercise is irrelevant — Proper exercise is important for brain health","No family history — Multiple factors affect risk"]},
+sec7:{title:"Practical Resources & References", list:["Books: 'Alzheimer's Disease Self-Help Handbook', 'Scientific Care for Alzheimer's', 'Brain Health and Cognitive Training'","Official Guidelines: WHO Alzheimer guidelines, Chinese Geriatrics Society Guidelines","Offline materials: PDF, HTML manuals","Video tutorials: Cognitive training videos, caregiving skills tutorials","Community & support: Local nursing homes, day-care centers, volunteer groups","Medical journals: Downloadable Alzheimer's research papers PDF"]}
+}
 };
 
 function switchLang(){
@@ -162,6 +149,62 @@ function switchLang(){
 function toggleFont(){
   document.body.classList.toggle('big-font');
 }
+
+function drawCanvas(){
+  const brain = document.getElementById('canvasBrain').getContext('2d');
+  brain.fillStyle = '#d9534f';
+  brain.fillRect(50,50,500,200);
+  brain.fillStyle = '#fff';
+  brain.font = '24px Arial';
+  brain.fillText('大脑示意图', 200, 130);
+
+  const stages = document.getElementById('canvasStages').getContext('2d');
+  stages.fillStyle = '#5bc0de';
+  stages.fillRect(50,50,500,200);
+  stages.fillStyle = '#fff';
+  stages.font = '24px Arial';
+  stages.fillText('疾病分期示意图', 180, 130);
+
+  const care = document.getElementById('canvasCare').getContext('2d');
+  care.fillStyle = '#5cb85c';
+  care.fillRect(50,50,500,200);
+  care.fillStyle = '#fff';
+  care.font = '24px Arial';
+  care.fillText('家庭照护示意图', 180, 130);
+
+  const prevent = document.getElementById('canvasPrevent').getContext('2d');
+  prevent.fillStyle = '#f0ad4e';
+  prevent.fillRect(50,50,500,200);
+  prevent.fillStyle = '#fff';
+  prevent.font = '24px Arial';
+  prevent.fillText('预防措施示意图', 180, 130);
+
+  const social = document.getElementById('canvasSocial').getContext('2d');
+  social.fillStyle = '#9467bd';
+  social.fillRect(50,50,500,200);
+  social.fillStyle = '#fff';
+  social.font = '24px Arial';
+  social.fillText('心理与社会支持示意图', 120, 130);
+
+  const mistake = document.getElementById('canvasMistake').getContext('2d');
+  mistake.fillStyle = '#d9534f';
+  mistake.fillRect(50,50,500,200);
+  mistake.fillStyle = '#fff';
+  mistake.font = '24px Arial';
+  mistake.fillText('常见误区示意图', 180, 130);
+
+  const resource = document.getElementById('canvasResource').getContext('2d');
+  resource.fillStyle = '#5bc0de';
+  resource.fillRect(50,50,500,200);
+  resource.fillStyle = '#fff';
+  resource.font = '24px Arial';
+  resource.fillText('资源与参考资料示意图', 140, 130);
+}
+
+window.onload = function(){
+  drawCanvas();
+  switchLang(); // 初始化显示中文内容
+};
 </script>
 </body>
 </html>
