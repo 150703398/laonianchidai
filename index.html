@@ -1,80 +1,201 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Tetris</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>俄罗斯方块</title>
+
 <style>
 body{
   margin:0;
+  background:#020617;
+  color:#e5e7eb;
+  font-family:system-ui;
   display:flex;
   justify-content:center;
   align-items:center;
-  height:100vh;
-  background:#000;
+  min-height:100vh;
 }
+
+.app{
+  background:#020617;
+  border-radius:16px;
+  padding:16px;
+  box-shadow:0 20px 50px rgba(0,0,0,.6);
+  max-width:360px;
+  width:100%;
+}
+
 canvas{
-  background:#111;
+  background:#000;
+  width:100%;
+  border-radius:8px;
 }
+
+.info{
+  display:flex;
+  justify-content:space-between;
+  margin:10px 0;
+  font-size:14px;
+}
+
+.controls{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:12px;
+}
+
+.btn{
+  background:#0ea5e9;
+  border:none;
+  color:#000;
+  font-size:18px;
+  padding:12px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+.btn:active{transform:scale(.95)}
 </style>
 </head>
-<body>
 
-<canvas id="c" width="300" height="600"></canvas>
+<body>
+<div class="app">
+  <canvas id="game" width="300" height="600"></canvas>
+
+  <div class="info">
+    <div>分数：<span id="score">0</span></div>
+    <div>等级：<span id="level">1</span></div>
+  </div>
+
+  <!-- 触控按钮 -->
+  <div class="controls">
+    <button class="btn" onclick="move(-1)">←</button>
+    <button class="btn" onclick="rotate()">⟳</button>
+    <button class="btn" onclick="move(1)">→</button>
+    <button class="btn" onclick="drop()">↓</button>
+    <button class="btn" onclick="hardDrop()">⤓</button>
+    <button class="btn" onclick="reset()">↻</button>
+  </div>
+</div>
 
 <script>
-const c=document.getElementById("c");
-const x=c.getContext("2d");
+const cvs=document.getElementById("game");
+const ctx=cvs.getContext("2d");
 
-const COL=10,ROW=20,S=30;
-let board=Array.from({length:ROW},()=>Array(COL).fill(0));
-let p={x:4,y:0,s:[[1,1,1,1]]};
+const COL=10, ROW=20, S=30;
+const COLORS=["","#22d3ee","#a78bfa","#34d399","#facc15"];
 
-function draw(){
-  x.clearRect(0,0,300,600);
-  board.forEach((r,y)=>r.forEach((v,x0)=>{
-    if(v){x.fillStyle="#0ff";x.fillRect(x0*S,y*S,S-1,S-1);}
-  }));
-  p.s.forEach((r,y)=>r.forEach((v,x0)=>{
-    if(v){x.fillRect((p.x+x0)*S,(p.y+y)*S,S-1,S-1);}
-  }));
+let board, piece, score=0, level=1, speed=600;
+
+const SHAPES=[
+ [[1,1,1,1]],
+ [[2,0,0],[2,2,2]],
+ [[0,3,3],[3,3,0]],
+ [[4,4],[4,4]]
+];
+
+function reset(){
+  board=Array.from({length:ROW},()=>Array(COL).fill(0));
+  score=0; level=1; speed=600;
+  newPiece();
+}
+reset();
+
+function newPiece(){
+  const s=SHAPES[Math.random()*SHAPES.length|0];
+  piece={s,x:3,y:0};
+  if(collide()) reset();
 }
 
 function collide(){
-  return p.s.some((r,y)=>r.some((v,x0)=>{
+  return piece.s.some((r,y)=>r.some((v,x)=>{
     if(!v)return false;
-    let nx=p.x+x0,ny=p.y+y;
+    let nx=piece.x+x, ny=piece.y+y;
     return nx<0||nx>=COL||ny>=ROW||board[ny]?.[nx];
   }));
 }
 
-function tick(){
-  p.y++;
+function merge(){
+  piece.s.forEach((r,y)=>r.forEach((v,x)=>{
+    if(v) board[piece.y+y][piece.x+x]=v;
+  }));
+}
+
+function clearLines(){
+  board=board.filter(r=>{
+    if(r.every(v=>v)){
+      score+=100;
+      level=1+Math.floor(score/500);
+      speed=Math.max(100,600-level*60);
+      return false;
+    }
+    return true;
+  });
+  while(board.length<ROW) board.unshift(Array(COL).fill(0));
+}
+
+function draw(){
+  ctx.clearRect(0,0,300,600);
+  board.forEach((r,y)=>r.forEach((v,x)=>{
+    if(v){ctx.fillStyle=COLORS[v];ctx.fillRect(x*S,y*S,S-1,S-1);}
+  }));
+  piece.s.forEach((r,y)=>r.forEach((v,x)=>{
+    if(v){ctx.fillStyle=COLORS[v];ctx.fillRect((piece.x+x)*S,(piece.y+y)*S,S-1,S-1);}
+  }));
+  scoreEl.textContent=score;
+  levelEl.textContent=level;
+}
+
+function move(d){
+  piece.x+=d;
+  if(collide()) piece.x-=d;
+  draw();
+}
+
+function rotate(){
+  const prev=piece.s;
+  piece.s=piece.s[0].map((_,i)=>piece.s.map(r=>r[i]).reverse());
+  if(collide()) piece.s=prev;
+  draw();
+}
+
+function drop(){
+  piece.y++;
   if(collide()){
-    p.y--;
-    p.s.forEach((r,y)=>r.forEach((v,x0)=>{
-      if(v)board[p.y+y][p.x+x0]=1;
-    }));
-    p={x:4,y:0,s:[[1,1,1,1]]};
-    if(collide()) alert("Game Over");
+    piece.y--;
+    merge();
+    clearLines();
+    newPiece();
   }
   draw();
 }
 
-setInterval(tick,500);
+function hardDrop(){
+  while(!collide()) piece.y++;
+  piece.y--;
+  merge();
+  clearLines();
+  newPiece();
+  draw();
+}
 
 document.onkeydown=e=>{
-  if(e.key==="ArrowLeft")p.x--;
-  if(e.key==="ArrowRight")p.x++;
-  if(e.key==="ArrowDown")p.y++;
-  if(collide()){
-    if(e.key==="ArrowLeft")p.x++;
-    if(e.key==="ArrowRight")p.x--;
-    if(e.key==="ArrowDown")p.y--;
-  }
-  draw();
-}
-</script>
+  if(e.key==="ArrowLeft")move(-1);
+  if(e.key==="ArrowRight")move(1);
+  if(e.key==="ArrowUp")rotate();
+  if(e.key==="ArrowDown")drop();
+  if(e.key===" ")hardDrop();
+};
 
+const scoreEl=document.getElementById("score");
+const levelEl=document.getElementById("level");
+
+(function loop(){
+  drop();
+  setTimeout(loop,speed);
+})();
+</script>
 </body>
 </html>
