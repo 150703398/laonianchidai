@@ -2,200 +2,224 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>俄罗斯方块</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>老年痴呆症科普（微信版）</title>
 
 <style>
 body{
   margin:0;
-  background:#020617;
-  color:#e5e7eb;
-  font-family:system-ui;
+  font-family:"PingFang SC","Microsoft YaHei",sans-serif;
+  background:#f7f9fc;
+  color:#111;
+  line-height:2.1;
+  font-size:22px;
+}
+header{
+  background:#2a5bd7;
+  color:#fff;
+  padding:26px 16px;
+  text-align:center;
+}
+header h1{
+  margin:0;
+  font-size:28px;
+}
+header p{
+  margin-top:10px;
+  font-size:18px;
+  opacity:.95;
+}
+.toolbar{
   display:flex;
-  justify-content:center;
-  align-items:center;
-  min-height:100vh;
+  justify-content:space-around;
+  padding:12px;
+  background:#fff;
+  border-bottom:1px solid #ddd;
 }
-
-.app{
-  background:#020617;
-  border-radius:16px;
-  padding:16px;
-  box-shadow:0 20px 50px rgba(0,0,0,.6);
-  max-width:360px;
-  width:100%;
+button{
+  font-size:18px;
+  padding:10px 16px;
+  border-radius:10px;
+  border:1px solid #ccc;
+  background:#fff;
 }
-
-canvas{
-  background:#000;
-  width:100%;
-  border-radius:8px;
+main{
+  padding:14px;
 }
-
-.info{
+.section{
+  background:#fff;
+  border-radius:14px;
+  margin-bottom:16px;
+  overflow:hidden;
+  border:1px solid #e6e6e6;
+}
+.section h2{
+  margin:0;
+  padding:18px;
+  background:#eef3ff;
   display:flex;
   justify-content:space-between;
-  margin:10px 0;
-  font-size:14px;
+  align-items:center;
+  font-size:22px;
 }
-
-.controls{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  margin-top:12px;
+.arrow{
+  font-size:20px;
+  transition:transform .3s ease;
 }
-
-.btn{
-  background:#0ea5e9;
-  border:none;
-  color:#000;
-  font-size:18px;
-  padding:12px;
-  border-radius:10px;
-  font-weight:bold;
+.section.open .arrow{
+  transform:rotate(90deg);
 }
-
-.btn:active{transform:scale(.95)}
+.content{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .4s ease;
+  padding:0 18px;
+}
+.section.open .content{
+  max-height:3000px;
+  padding:18px;
+}
+ul{padding-left:24px}
+li{margin-bottom:8px}
+footer{
+  text-align:center;
+  font-size:16px;
+  color:#666;
+  padding:24px 10px;
+}
+.big-font{
+  font-size:26px;
+}
+.game button{
+  font-size:20px;
+  margin:6px;
+  padding:10px 14px;
+}
+.card{
+  width:60px;
+  height:60px;
+  font-size:26px;
+}
 </style>
 </head>
 
 <body>
-<div class="app">
-  <canvas id="game" width="300" height="600"></canvas>
 
-  <div class="info">
-    <div>分数：<span id="score">0</span></div>
-    <div>等级：<span id="level">1</span></div>
-  </div>
+<header>
+<h1 id="title">老年痴呆症（阿尔茨海默病）</h1>
+<p id="subtitle">给家人看的 · 简单 · 清楚 · 不费眼</p>
+</header>
 
-  <!-- 触控按钮 -->
-  <div class="controls">
-    <button class="btn" onclick="move(-1)">←</button>
-    <button class="btn" onclick="rotate()">⟳</button>
-    <button class="btn" onclick="move(1)">→</button>
-    <button class="btn" onclick="drop()">↓</button>
-    <button class="btn" onclick="hardDrop()">⤓</button>
-    <button class="btn" onclick="reset()">↻</button>
-  </div>
+<div class="toolbar">
+<button onclick="switchLang()">中 / EN</button>
+<button onclick="toggleFont()">超大字</button>
 </div>
 
+<main>
+
+<div class="section">
+<h2 onclick="toggle(this)">什么是老年痴呆症 <span class="arrow">▶</span></h2>
+<div class="content">
+<p>老年痴呆症是一种大脑慢慢退化的疾病，不是正常变老。</p>
+<p>主要表现是记忆力越来越差，后来会影响生活自理。</p>
+</div>
+</div>
+
+<div class="section">
+<h2 onclick="toggle(this)">常见表现 <span class="arrow">▶</span></h2>
+<div class="content">
+<ul>
+<li>经常忘事、重复问话</li>
+<li>容易迷路</li>
+<li>脾气改变、焦虑或沉默</li>
+<li>生活能力下降</li>
+</ul>
+</div>
+</div>
+
+<div class="section">
+<h2 onclick="toggle(this)">家人如何照顾 <span class="arrow">▶</span></h2>
+<div class="content">
+<ul>
+<li>保持固定作息</li>
+<li>家中环境简单安全</li>
+<li>多陪伴，少责怪</li>
+<li>说话慢一点、简单一点</li>
+</ul>
+</div>
+</div>
+
+<div class="section">
+<h2 onclick="toggle(this)">日常预防 <span class="arrow">▶</span></h2>
+<div class="content">
+<ul>
+<li>多走路、多活动</li>
+<li>多和人聊天</li>
+<li>多读书、听音乐</li>
+<li>饮食清淡</li>
+</ul>
+</div>
+</div>
+
+<div class="section">
+<h2 onclick="toggle(this)">记忆小游戏 <span class="arrow">▶</span></h2>
+<div class="content game">
+<p>点击卡片，找出一样的图案</p>
+<div id="cards"></div>
+<button onclick="start()">重新开始</button>
+</div>
+</div>
+
+</main>
+
+<footer>
+<p>📱 微信 / H5 老年友好版 · 离线可用</p>
+</footer>
+
 <script>
-const cvs=document.getElementById("game");
-const ctx=cvs.getContext("2d");
-
-const COL=10, ROW=20, S=30;
-const COLORS=["","#22d3ee","#a78bfa","#34d399","#facc15"];
-
-let board, piece, score=0, level=1, speed=600;
-
-const SHAPES=[
- [[1,1,1,1]],
- [[2,0,0],[2,2,2]],
- [[0,3,3],[3,3,0]],
- [[4,4],[4,4]]
-];
-
-function reset(){
-  board=Array.from({length:ROW},()=>Array(COL).fill(0));
-  score=0; level=1; speed=600;
-  newPiece();
+function toggle(el){
+  el.parentElement.classList.toggle('open');
 }
-reset();
-
-function newPiece(){
-  const s=SHAPES[Math.random()*SHAPES.length|0];
-  piece={s,x:3,y:0};
-  if(collide()) reset();
+function toggleFont(){
+  document.body.classList.toggle('big-font');
 }
-
-function collide(){
-  return piece.s.some((r,y)=>r.some((v,x)=>{
-    if(!v)return false;
-    let nx=piece.x+x, ny=piece.y+y;
-    return nx<0||nx>=COL||ny>=ROW||board[ny]?.[nx];
-  }));
-}
-
-function merge(){
-  piece.s.forEach((r,y)=>r.forEach((v,x)=>{
-    if(v) board[piece.y+y][piece.x+x]=v;
-  }));
-}
-
-function clearLines(){
-  board=board.filter(r=>{
-    if(r.every(v=>v)){
-      score+=100;
-      level=1+Math.floor(score/500);
-      speed=Math.max(100,600-level*60);
-      return false;
-    }
-    return true;
-  });
-  while(board.length<ROW) board.unshift(Array(COL).fill(0));
-}
-
-function draw(){
-  ctx.clearRect(0,0,300,600);
-  board.forEach((r,y)=>r.forEach((v,x)=>{
-    if(v){ctx.fillStyle=COLORS[v];ctx.fillRect(x*S,y*S,S-1,S-1);}
-  }));
-  piece.s.forEach((r,y)=>r.forEach((v,x)=>{
-    if(v){ctx.fillStyle=COLORS[v];ctx.fillRect((piece.x+x)*S,(piece.y+y)*S,S-1,S-1);}
-  }));
-  scoreEl.textContent=score;
-  levelEl.textContent=level;
-}
-
-function move(d){
-  piece.x+=d;
-  if(collide()) piece.x-=d;
-  draw();
-}
-
-function rotate(){
-  const prev=piece.s;
-  piece.s=piece.s[0].map((_,i)=>piece.s.map(r=>r[i]).reverse());
-  if(collide()) piece.s=prev;
-  draw();
-}
-
-function drop(){
-  piece.y++;
-  if(collide()){
-    piece.y--;
-    merge();
-    clearLines();
-    newPiece();
+function switchLang(){
+  const t=document.getElementById('title');
+  if(t.innerText.includes('老年')){
+    t.innerText="Alzheimer's Disease";
+    document.getElementById('subtitle').innerText="Simple · Clear · Easy to Read";
+  }else{
+    t.innerText="老年痴呆症（阿尔茨海默病）";
+    document.getElementById('subtitle').innerText="给家人看的 · 简单 · 清楚 · 不费眼";
   }
-  draw();
 }
 
-function hardDrop(){
-  while(!collide()) piece.y++;
-  piece.y--;
-  merge();
-  clearLines();
-  newPiece();
-  draw();
+/* 记忆游戏 */
+let first=null;
+function start(){
+  const arr=['🍎','🍌','🍇','🍒'];
+  const cards=[...arr,...arr].sort(()=>0.5-Math.random());
+  const box=document.getElementById('cards');
+  box.innerHTML='';
+  cards.forEach(v=>{
+    const b=document.createElement('button');
+    b.className='card';
+    b.textContent='?';
+    b.onclick=()=>{
+      if(b.textContent!=='?')return;
+      b.textContent=v;
+      if(!first){first=b;}
+      else{
+        if(first.textContent!==v){
+          setTimeout(()=>{b.textContent='?';first.textContent='?';first=null;},700);
+        }else{first=null;}
+      }
+    };
+    box.appendChild(b);
+  });
 }
-
-document.onkeydown=e=>{
-  if(e.key==="ArrowLeft")move(-1);
-  if(e.key==="ArrowRight")move(1);
-  if(e.key==="ArrowUp")rotate();
-  if(e.key==="ArrowDown")drop();
-  if(e.key===" ")hardDrop();
-};
-
-const scoreEl=document.getElementById("score");
-const levelEl=document.getElementById("level");
-
-(function loop(){
-  drop();
-  setTimeout(loop,speed);
-})();
+start();
 </script>
+
 </body>
 </html>
