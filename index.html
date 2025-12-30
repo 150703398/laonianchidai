@@ -2,263 +2,149 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>老年痴呆症科普 · 微信大字版</title>
 
 <style>
-/* ===== 基础 ===== */
 body{
   margin:0;
   font-family:-apple-system,BlinkMacSystemFont,"Microsoft YaHei",Arial;
   background:#f4f6fa;
   color:#222;
   line-height:2.1;
-  font-size:22px;        /* 默认大字 */
-}
-header{
-  background:#1f4fd8;
-  color:#fff;
-  padding:28px 16px;
-  text-align:center;
-}
-header h1{margin:0;font-size:28px}
-header p{margin:10px 0 0;font-size:18px}
-
-/* ===== 工具栏 ===== */
-.toolbar{
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  flex-wrap:wrap;
-  padding:14px;
-  background:#fff;
-  border-bottom:1px solid #ddd;
-}
-button{
-  font-size:18px;
-  padding:14px 20px;
-  border-radius:10px;
-  border:1px solid #ccc;
-  background:#fff;
-}
-
-/* ===== 主体 ===== */
-main{
-  max-width:720px;
-  margin:16px auto;
-  padding:0 14px;
-}
-
-/* ===== 折叠模块 ===== */
-.section{
-  background:#fff;
-  border-radius:14px;
-  margin-bottom:16px;
-  border:1px solid #e5e5e5;
-  overflow:hidden;
-}
-.section h2{
-  margin:0;
-  padding:18px 18px;
-  background:#eef2ff;
-  color:#1f4fd8;
   font-size:22px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  cursor:pointer;
 }
-.arrow{
-  font-size:24px;
-  transition:transform .3s ease;
+header{background:#1f4fd8;color:#fff;padding:28px 16px;text-align:center}
+.toolbar{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;padding:14px;background:#fff}
+button{font-size:18px;padding:14px 20px;border-radius:10px;border:1px solid #ccc;background:#fff}
+main{max-width:720px;margin:16px auto;padding:0 14px}
+.section{background:#fff;border-radius:14px;margin-bottom:16px;border:1px solid #e5e5e5;overflow:hidden}
+.section h2{
+  margin:0;padding:18px;
+  background:#eef2ff;color:#1f4fd8;
+  display:flex;justify-content:space-between;align-items:center;
+  cursor:pointer
 }
-.section.open .arrow{
-  transform:rotate(90deg);
-}
-.content{
-  max-height:0;
-  overflow:hidden;
-  transition:max-height .45s ease;
-  padding:0 18px;
-}
-.section.open .content{
-  padding:18px;
-  max-height:5000px;
-}
-
-/* ===== 列表 ===== */
+.arrow{font-size:24px;transition:transform .3s}
+.section.open .arrow{transform:rotate(90deg)}
+.content{max-height:0;overflow:hidden;transition:max-height .45s;padding:0 18px}
+.section.open .content{padding:18px;max-height:5000px}
 ul{padding-left:26px}
 li{margin-bottom:10px}
-
-/* ===== 游戏 ===== */
-.card{
-  width:64px;
-  height:64px;
-  font-size:28px;
-  margin:6px;
-}
-.game-box button{
-  margin:6px;
-}
-
-/* ===== 底部 ===== */
-footer{
-  text-align:center;
-  font-size:16px;
-  color:#666;
-  padding:20px;
-}
-
-/* ===== 打印 ===== */
-@media print{
-  .toolbar{display:none}
-  body{font-size:16px}
-  .content{max-height:none!important}
-}
+footer{text-align:center;font-size:16px;color:#666;padding:20px}
+.card{width:64px;height:64px;font-size:28px;margin:6px}
 </style>
 </head>
 
 <body>
 
 <header>
-<h1 id="title">老年痴呆症（阿尔茨海默病）</h1>
-<p id="subtitle">微信 / 手机专用 · 大字离线科普</p>
+<h1 id="pageTitle"></h1>
+<p id="pageSub"></p>
 </header>
 
 <div class="toolbar">
-<button onclick="switchLang()">🌍 中 / EN</button>
-<button onclick="window.print()">🖨 打印</button>
+<button onclick="switchLang()">🌍 中文 / EN</button>
 </div>
 
-<main>
-
-<!-- 模块模板 -->
-<div class="section">
-<h2 onclick="toggle(this)">什么是老年痴呆症 <span class="arrow">▶</span></h2>
-<div class="content">
-<p>老年痴呆症通常指阿尔茨海默病，是一种进行性的大脑退行性疾病，不是正常衰老。</p>
-<p>它会逐渐影响记忆、判断、语言和生活能力。</p>
-</div>
-</div>
-
-<div class="section">
-<h2 onclick="toggle(this)">疾病发展过程 <span class="arrow">▶</span></h2>
-<div class="content">
-<ul>
-<li>早期：健忘、注意力下降</li>
-<li>中期：生活需协助</li>
-<li>晚期：完全依赖照护</li>
-</ul>
-</div>
-</div>
-
-<div class="section">
-<h2 onclick="toggle(this)">家庭照护要点 <span class="arrow">▶</span></h2>
-<div class="content">
-<ul>
-<li>环境简单、安全</li>
-<li>语气温和、少纠正</li>
-<li>固定作息</li>
-</ul>
-</div>
-</div>
-
-<div class="section">
-<h2 onclick="toggle(this)">预防与延缓 <span class="arrow">▶</span></h2>
-<div class="content">
-<ul>
-<li>规律运动</li>
-<li>多交流</li>
-<li>持续用脑</li>
-</ul>
-</div>
-</div>
-
-<div class="section">
-<h2 onclick="toggle(this)">研究进展 <span class="arrow">▶</span></h2>
-<div class="content">
-<p>目前研究集中在早期筛查、生物标志物、新药物与生活方式干预。</p>
-</div>
-</div>
-
-<div class="section">
-<h2 onclick="toggle(this)">🧠 互动小游戏 <span class="arrow">▶</span></h2>
-<div class="content game-box">
-
-<p><b>记忆翻牌</b></p>
-<div id="cards"></div>
-<button onclick="startMemory()">重新开始</button>
-
-<p><b>数字回忆</b></p>
-<p id="numShow">点击开始</p>
-<input id="numInput" style="font-size:20px;padding:6px">
-<br>
-<button onclick="startNum()">开始</button>
-<button onclick="checkNum()">提交</button>
-<p id="numResult"></p>
-
-</div>
-</div>
-
-</main>
+<main id="content"></main>
 
 <footer>
-<p>📱 微信 / H5 离线科普页 · 可长期保存</p>
+<p>📱 离线科普 · 微信 / 手机可用</p>
 </footer>
 
 <script>
-function toggle(el){
-  el.parentElement.classList.toggle('open');
+let currentLang='zh';
+
+const langData={
+zh:{
+title:"老年痴呆症（阿尔茨海默病）",
+sub:"微信 / 手机专用 · 大字离线科普",
+sections:[
+{t:"什么是老年痴呆症",c:"老年痴呆症通常指阿尔茨海默病，是一种进行性的大脑退行性疾病，不是正常衰老。"},
+{t:"疾病发展过程",c:"分为早期、中期和晚期，症状会逐步加重，早期干预非常重要。"},
+{t:"家庭照护要点",c:"保持环境安全、规律作息、耐心沟通，对患者帮助很大。"},
+{t:"预防与延缓",c:"运动、社交和持续用脑可降低风险并延缓发展。"},
+{t:"研究进展",c:"研究集中在早期筛查、新药物和生活方式干预。"},
+{t:"互动小游戏",c:"下面的小游戏可用于日常认知训练。",game:true}
+]
+},
+en:{
+title:"Alzheimer's Disease",
+sub:"Mobile Offline Large-Text Guide",
+sections:[
+{t:"What is Alzheimer's Disease",c:"Alzheimer's disease is a progressive neurodegenerative disorder and not a normal part of aging."},
+{t:"Disease Progression",c:"The disease progresses through early, middle, and late stages."},
+{t:"Family Care Tips",c:"A safe environment and patient communication are essential."},
+{t:"Prevention & Delay",c:"Exercise, social activity, and mental stimulation help reduce risk."},
+{t:"Research Progress",c:"Research focuses on early detection and new treatments."},
+{t:"Interactive Games",c:"The following games help with cognitive training.",game:true}
+]
 }
+};
+
+function render(){
+const d=langData[currentLang];
+document.getElementById('pageTitle').innerText=d.title;
+document.getElementById('pageSub').innerText=d.sub;
+const main=document.getElementById('content');
+main.innerHTML='';
+d.sections.forEach(s=>{
+const sec=document.createElement('div');
+sec.className='section';
+sec.innerHTML=`
+<h2 onclick="this.parentElement.classList.toggle('open')">
+${s.t}<span class="arrow">▶</span>
+</h2>
+<div class="content">
+<p>${s.c}</p>
+${s.game?gameHTML():''}
+</div>`;
+main.appendChild(sec);
+});
+}
+
+function gameHTML(){
+return `
+<div>
+<div id="cards"></div>
+<button onclick="startMemory()">重新开始</button>
+</div>`;
+}
+
 function switchLang(){
-  const t=document.getElementById('title');
-  if(t.innerText.includes('老年')){
-    t.innerText="Alzheimer's Disease";
-    document.getElementById('subtitle').innerText="Mobile Offline Guide";
-  }else{
-    t.innerText="老年痴呆症（阿尔茨海默病）";
-    document.getElementById('subtitle').innerText="微信 / 手机专用 · 大字离线科普";
-  }
-}
-
-/* 游戏 */
-let first=null;
-function startMemory(){
-  const arr=['🍎','🍌','🍇','🍒'];
-  const cards=[...arr,...arr].sort(()=>0.5-Math.random());
-  const box=document.getElementById('cards');
-  box.innerHTML='';
-  cards.forEach(v=>{
-    const b=document.createElement('button');
-    b.className='card';
-    b.textContent='?';
-    b.onclick=()=>{
-      if(b.textContent!=='?')return;
-      b.textContent=v;
-      if(!first){first=b;}
-      else{
-        if(first.textContent!==v){
-          setTimeout(()=>{b.textContent='?';first.textContent='?';first=null;},700);
-        }else{first=null;}
-      }
-    };
-    box.appendChild(b);
-  });
-}
+currentLang=currentLang==='zh'?'en':'zh';
+render();
 startMemory();
+}
 
-let cur='';
-function startNum(){
-  cur=Math.floor(Math.random()*90000+10000).toString();
-  document.getElementById('numShow').innerText=cur;
-  setTimeout(()=>document.getElementById('numShow').innerText='请输入记住的数字',3000);
+function startMemory(){
+const arr=['🍎','🍌','🍇','🍒'];
+const cards=[...arr,...arr].sort(()=>0.5-Math.random());
+const box=document.getElementById('cards');
+if(!box)return;
+box.innerHTML='';
+let first=null;
+cards.forEach(v=>{
+const b=document.createElement('button');
+b.className='card';
+b.textContent='?';
+b.onclick=()=>{
+if(b.textContent!=='?')return;
+b.textContent=v;
+if(!first)first=b;
+else{
+if(first.textContent!==v){
+setTimeout(()=>{b.textContent='?';first.textContent='?';first=null},700);
+}else first=null;
 }
-function checkNum(){
-  document.getElementById('numResult').innerText=
-  document.getElementById('numInput').value===cur?'正确 🎉':'错误，答案是 '+cur;
+};
+box.appendChild(b);
+});
 }
+
+render();
+startMemory();
 </script>
 
 </body>
